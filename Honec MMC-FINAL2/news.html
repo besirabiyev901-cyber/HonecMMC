@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read latest Honec Company updates and project news.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/ufflogo.png" type="image/x-icon">
+    <title>Honec Company | News</title>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="index.html" aria-label="Honec Company home">
+                <img src="images/ufflogo.png" alt="Honec Company logo">
+            </a>
+            <button class="burger" type="button" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="site-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li class="active"><a href="news.html">News</a></li>
+                    <li><a href="auth.html">Account</a></li>
+                    <li><a href="messages.html">Dashboard</a></li>
+                    <li id="adminNavItem" style="display:none"><a href="admin.html">Admin</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Hero -->
+        <div class="news-hero container">
+            <span class="eyebrow">News &amp; Updates</span>
+            <h1>Company updates &amp; project notes.</h1>
+            <p>Follow service announcements, practical advice, and progress from our current work.</p>
+            <div class="rt-badge">
+                <span class="rt-dot"></span>
+                Live — likes &amp; comments update in real time
+            </div>
+        </div>
+
+        <div class="news-layout">
+            <div class="news-center">
+
+                <!-- Stories bar -->
+                <div class="stories-bar" id="storiesBar">
+                    <!-- populated by JS -->
+                </div>
+
+                <!-- Feed controls -->
+                <div class="feed-controls">
+                    <div class="feed-tabs">
+                        <button class="feed-tab active" data-filter="all">All</button>
+                        <button class="feed-tab" data-filter="recent">Recent</button>
+                        <button class="feed-tab" data-filter="popular">Popular</button>
+                    </div>
+                    <div class="feed-search">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="feedSearch" placeholder="Search posts…">
+                    </div>
+                    <button class="create-post-fab" id="openCreatorBtn" style="display:none">
+                        <svg width="13" height="13" viewBox="0 0 15 15" fill="none"><path d="M7.5 1v13M1 7.5h13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                        New Post
+                    </button>
+                </div>
+
+                <!-- Saved posts banner -->
+                <div class="saved-banner" id="savedBanner">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                    <span id="savedBannerText">You have saved posts</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:auto"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+
+                <!-- Feed -->
+                <div class="news-feed" id="newsFeed">
+                    <div class="feed-state">Loading posts…</div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Post Creator Modal -->
+    <div class="creator-overlay" id="creatorOverlay" role="dialog" aria-modal="true" aria-label="Post editor">
+        <div class="creator-modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Post</h2>
+                <button class="modal-close" id="closeCreatorBtn" aria-label="Close">
+                    <svg width="13" height="13" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editPostId">
+
+                <div class="modal-tabs" role="tablist">
+                    <button class="modal-tab active" data-tab="content" role="tab">Content</button>
+                    <button class="modal-tab" data-tab="media" role="tab">Media</button>
+                    <button class="modal-tab" data-tab="files" role="tab">Files</button>
+                    <button class="modal-tab" data-tab="settings" role="tab">Settings</button>
+                </div>
+
+                <!-- Content tab -->
+                <div class="modal-section active" data-section="content">
+                    <div class="field-group">
+                        <label class="field-label" for="postTitle">Title <span>*</span></label>
+                        <input class="modal-input" id="postTitle" type="text" placeholder="Post title…">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="postDesc">Body <span>*</span></label>
+                        <textarea class="modal-textarea" id="postDesc" placeholder="Write your update…"></textarea>
+                    </div>
+                </div>
+
+                <!-- Media tab -->
+                <div class="modal-section" data-section="media">
+                    <div class="field-group">
+                        <label class="field-label" for="postImage">Cover Image URL</label>
+                        <input class="modal-input" id="postImage" type="url" placeholder="https://…/photo.jpg">
+                        <div class="img-preview-wrap" id="imgPreviewWrap">
+                            <img id="imgPreview" src="" alt="Preview">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label" for="postVideo">Video URL</label>
+                            <input class="modal-input" id="postVideo" type="url" placeholder="YouTube or mp4…">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label" for="postLink">External Link</label>
+                            <input class="modal-input" id="postLink" type="url" placeholder="https://…">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="postLinkLabel">Link Button Label</label>
+                        <input class="modal-input" id="postLinkLabel" type="text" placeholder="Read more">
+                    </div>
+                </div>
+
+                <!-- Files tab -->
+                <div class="modal-section" data-section="files">
+                    <div class="field-group">
+                        <label class="field-label">Upload from Device</label>
+                        <div class="file-drop-zone" id="fileDropZone">
+                            <input type="file" id="filePickerInput" multiple
+                                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.7z,.tar,.gz,
+                                        .exe,.apk,.dmg,.msi,.deb,.rpm,
+                                        .jpg,.jpeg,.png,.gif,.webp,.svg,
+                                        .mp4,.mov,.avi,.mkv,.webm,
+                                        .mp3,.wav,.aac,.flac,
+                                        .txt,.csv,.json,.xml,.html,.css,.js,
+                                        application/octet-stream">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text-muted);margin-bottom:.4rem"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <p><strong>Click to browse</strong> or drag &amp; drop</p>
+                            <p style="font-size:.75rem;margin-top:.2rem;color:var(--text-light)">PDF, EXE, APK, ZIP, images, video &amp; more</p>
+                        </div>
+                        <div class="upload-queue-modal" id="uploadQueue"></div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Link Attachments</label>
+                        <div class="attachment-rows-modal" id="attachmentRows">
+                            <div class="att-row">
+                                <input class="modal-input" type="text" placeholder="Label">
+                                <input class="modal-input" type="url" placeholder="https://…">
+                                <select class="modal-select">
+                                    <option value="file">File</option>
+                                    <option value="link">Link</option>
+                                </select>
+                                <button type="button" class="row-rm" title="Remove">
+                                    <svg width="11" height="11" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-att-btn" id="addAttachmentRowBtn">+ Add attachment URL</button>
+                    </div>
+                </div>
+
+                <!-- Settings tab -->
+                <div class="modal-section" data-section="settings">
+                    <div class="field-group">
+                        <label class="field-label" for="postPublished">Visibility</label>
+                        <select class="modal-select" id="postPublished" style="max-width:280px">
+                            <option value="true">Published — visible to everyone</option>
+                            <option value="false">Draft — hidden from public</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn-publish-modal" id="publishBtn" type="button">Publish Post</button>
+                <button class="btn-discard" id="cancelEditBtn" type="button" style="display:none">Cancel Edit</button>
+                <span id="modalStatus"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close image">
+            <svg width="14" height="14" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>Dependable project planning, construction, renovation, and support services.</p>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Baku, Azerbaijan</p>
+                <p><a href="mailto:honecsoftware@gmail.com">honecsoftware@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/supabase-config.js"></script>
+    <script type="module" src="js/news-feed.js"></script>
+</body>
+</html>

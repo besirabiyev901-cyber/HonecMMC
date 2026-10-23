@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Honec Company about your next project.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/ufflogo.png" type="image/x-icon">
+    <title>Honec Company | Contacts</title>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="index.html" aria-label="Honec Company home">
+                <img src="images/ufflogo.png" alt="Honec Company logo">
+            </a>
+            <button class="burger" type="button" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="site-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="auth.html">Account</a></li>
+                    <li><a href="messages.html">Dashboard</a></li>
+                    <li class=" active"><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero container">
+            <div>
+                <span class="eyebrow">Contacts</span>
+                <h1>Let us talk about your project.</h1>
+                <p>Send a message with your idea, location, and timeline. We will reply with the next steps.</p>
+            </div>
+            <div class="contact-card">
+                <h2>Contact details</h2>
+                <p><strong>Location:</strong> Baku, Azerbaijan</p>
+                <p><strong>Email:</strong> <a href="mailto:honecsoftware@gmail.com">honecsoftware@gmail.com</a></p>
+                <p><strong>Hours:</strong> Monday to Friday, 09:00–18:00</p>
+            </div>
+        </section>
+
+        <!-- Contact form -->
+        <section class="feedback">
+            <div class="container">
+                <span class="eyebrow">Message us</span>
+                <h2>Send a request</h2>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" placeholder="Your name" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="contactEmail">Email</label>
+                        <input id="contactEmail" name="email" type="email" placeholder="Your email" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="subject">Subject</label>
+                        <input id="subject" name="subject" type="text" placeholder="Project subject" required>
+                    </div>
+                    <div class="form-row full">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your project" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                    <p class="form-status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>Dependable project planning, construction, renovation, and support services.</p>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news.html">News</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Baku, Azerbaijan</p>
+                <p><a href="mailto:honecsoftware@gmail.com">honecsoftware@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/supabase-config.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

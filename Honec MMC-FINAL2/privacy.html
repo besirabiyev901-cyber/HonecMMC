@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Honec Company Privacy Policy — how we collect, use, and protect your data.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/ufflogo.png" type="image/x-icon">
+    <title>Honec Company | Privacy Policy</title>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="index.html" aria-label="Honec Company home">
+                <img src="images/ufflogo.png" alt="Honec Company logo">
+            </a>
+            <button class="burger" type="button" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="site-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="auth.html">Account</a></li>
+                    <li><a href="messages.html">Dashboard</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero container compact-hero">
+            <div>
+                <span class="eyebrow">Legal</span>
+                <h1>Privacy Policy</h1>
+                <p>Last updated: June 2026</p>
+            </div>
+        </section>
+
+        <section class="container" style="max-width:760px;padding-bottom:5rem">
+            <article style="line-height:1.75;color:var(--text,#222)">
+
+                <h2>1. Who we are</h2>
+                <p>
+                    Honec Company ("we", "our", "us") provides project planning, construction,
+                    renovation, and support services. This policy explains what personal data we
+                    collect when you use our website and how we use it.
+                </p>
+
+                <h2>2. Data we collect</h2>
+                <p>We collect data you provide directly:</p>
+                <ul>
+                    <li><strong>Account registration</strong> — name, email address, and password hash (stored securely by Supabase Auth).</li>
+                    <li><strong>OAuth sign-in</strong> — if you sign in with Google or GitHub, we receive your name, email, and profile picture from that provider.</li>
+                    <li><strong>Contact form</strong> — name, email, subject, and message.</li>
+                    <li><strong>Newsletter</strong> — email address only.</li>
+                    <li><strong>News comments and reactions</strong> — comment text and emoji reactions linked to your account.</li>
+                </ul>
+                <p>We also collect limited technical data automatically:</p>
+                <ul>
+                    <li>IP address and browser user-agent (logged by Cloudflare for security and DDoS protection).</li>
+                    <li>Pages visited and timestamps (standard Cloudflare analytics).</li>
+                </ul>
+
+                <h2>3. How we use your data</h2>
+                <ul>
+                    <li>To create and manage your account.</li>
+                    <li>To respond to contact form messages.</li>
+                    <li>To send newsletter updates (only if you subscribed).</li>
+                    <li>To display your name next to comments and reactions.</li>
+                    <li>To detect abuse and enforce our Terms of Service (ban/suspend accounts).</li>
+                </ul>
+
+                <h2>4. Data storage and processors</h2>
+                <p>
+                    Your data is stored in <a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a>
+                    (PostgreSQL database hosted on AWS). Our website is served via
+                    <a href="https://cloudflare.com" target="_blank" rel="noopener">Cloudflare</a> Workers.
+                    We do not sell your data to third parties.
+                </p>
+
+                <h2>5. Data retention</h2>
+                <p>
+                    Account data is retained until you request deletion. Contact messages are retained
+                    for up to 2 years. Newsletter subscriptions are retained until you unsubscribe.
+                </p>
+
+                <h2>6. Your rights</h2>
+                <p>
+                    You may request access to, correction of, or deletion of your personal data at
+                    any time by emailing us at the address below. We will respond within 30 days.
+                </p>
+
+                <h2>7. Cookies</h2>
+                <p>
+                    We set one functional cookie (<code>__csrf</code>) to protect against cross-site
+                    request forgery. No advertising or tracking cookies are used.
+                    Supabase stores a session token in <code>localStorage</code> to keep you signed in.
+                </p>
+
+                <h2>8. Security</h2>
+                <p>
+                    All data is transmitted over HTTPS. Passwords are hashed by Supabase Auth and
+                    never stored in plain text. Row-Level Security (RLS) policies in our database
+                    ensure users can only access data they are authorised to see.
+                </p>
+
+                <h2>9. Contact</h2>
+                <p>
+                    For privacy enquiries, please use the <a href="contacts.html">Contact page</a>
+                    or email us directly. We do not have a dedicated DPO but will handle all requests
+                    promptly.
+                </p>
+
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>Dependable project planning, construction, renovation, and support services.</p>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Legal</h3>
+                <p><a href="privacy.html">Privacy Policy</a></p>
+                <p><a href="terms.html">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/supabase-config.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

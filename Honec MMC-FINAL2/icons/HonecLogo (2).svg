@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="210" height="64" viewBox="0 0 210 64" role="img" aria-labelledby="title">
+  <title id="title">Honec Company</title>
+  <rect width="64" height="64" rx="14" fill="#f16f20"/>
+  <path d="M17 43V21h7v8h16v-8h7v22h-7v-8H24v8h-7z" fill="#fff"/>
+  <text x="80" y="28" fill="#7d370d" font-family="Georgia, serif" font-size="24" font-weight="700">Honec</text>
+  <text x="80" y="48" fill="#7a6655" font-family="Georgia, serif" font-size="14">Company</text>
+</svg>

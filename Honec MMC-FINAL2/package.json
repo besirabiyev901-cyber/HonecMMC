@@ -1,0 +1,16 @@
+{
+  "name": "honec-backend",
+  "version": "1.0.0",
+  "description": "Honec backend – Node.js + SQLite + Supabase/Cloudflare hardened",
+  "main": "server.js",
+  "scripts": {
+    "start":     "node server.js",
+    "dev":       "NODE_ENV=development node server.js",
+    "smoke":     "node smoke-test.js",
+    "test":      "node smoke-test.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3"
+  }
+}

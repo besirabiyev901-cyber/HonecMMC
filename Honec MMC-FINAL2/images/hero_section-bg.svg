@@ -1,0 +1,21 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Modern construction project</title>
+  <desc id="desc">Warm architectural illustration for Honec Company.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3ede5"/>
+      <stop offset="1" stop-color="#f9c09a"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7d370d"/>
+      <stop offset="1" stop-color="#f16f20"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky)"/>
+  <circle cx="1000" cy="160" r="130" fill="#fff" opacity=".35"/>
+  <path d="M80 720h1040v100H80z" fill="#7d370d" opacity=".15"/>
+  <path d="M190 690h190V330h150v360h190V210h285v480h120v130H190z" fill="#fff8ef"/>
+  <path d="M250 390h58v70h-58zm92 0h58v70h-58zm0 110h58v70h-58zm-92 110h58v70h-58zm350-325h74v80h-74zm118 0h74v80h-74zm118 0h74v80h-74zm-236 130h74v80h-74zm118 0h74v80h-74zm118 0h74v80h-74zm-236 130h74v80h-74zm118 0h74v80h-74zm118 0h74v80h-74z" fill="#f16f20" opacity=".58"/>
+  <path d="M130 732h940" stroke="#7d370d" stroke-width="12" stroke-linecap="round" opacity=".35"/>
+  <path d="M185 250l170-120 170 120" fill="none" stroke="url(#orange)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

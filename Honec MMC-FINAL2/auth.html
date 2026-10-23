@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register or sign in to Honec Company.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/ufflogo.png" type="image/x-icon">
+    <title>Honec Company | Account</title>
+
+    <!--
+        CAPTCHA: Cloudflare Turnstile (free, privacy-friendly, no user puzzle needed).
+        Replace data-sitekey with your key from:
+        Cloudflare Dashboard → Turnstile → Add site
+        Then add the secret key in your Supabase project:
+        Authentication → Settings → Enable Captcha → paste Turnstile secret
+    -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="index.html" aria-label="Honec Company home">
+                <img src="images/ufflogo.png" alt="Honec Company logo">
+            </a>
+            <button class="burger" type="button" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="site-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li class="active"><a href="auth.html">Account</a></li>
+                    <li><a href="messages.html">Dashboard</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="page-hero container compact-hero">
+            <div>
+                <span class="eyebrow">Account</span>
+                <h1>Register or sign in.</h1>
+                <p>Your personal account information.</p>
+            </div>
+            <div class="contact-card account-help">
+                <h2>Current session</h2>
+                <p id="userBadge">Not logged in</p>
+                <a class="btn" href="messages.html">Open Dashboard</a>
+            </div>
+        </section>
+
+        <section class="feedback">
+            <div class="container auth-grid">
+
+                <!-- ── Register ── -->
+                <form id="registerForm" class="auth-card">
+                    <span class="eyebrow">Sign up</span>
+                    <h2>Create account</h2>
+
+                    <div class="oauth-group">
+                        <button type="button" id="registerGoogleBtn" class="btn-oauth btn-oauth--google" aria-label="Sign up with Google">
+                            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/></svg>
+                            Continue with Google
+                        </button>
+                        <button type="button" id="registerGithubBtn" class="btn-oauth btn-oauth--github" aria-label="Sign up with GitHub">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.216.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            Continue with GitHub
+                        </button>
+                    </div>
+
+                    <div class="oauth-divider"><span>or register with email</span></div>
+
+                    <div class="form-row">
+                        <label for="registerName">Name</label>
+                        <input id="registerName" name="name" type="text" placeholder="Your name" required autocomplete="name">
+                    </div>
+                    <div class="form-row">
+                        <label for="registerEmail">Email</label>
+                        <input id="registerEmail" name="email" type="email" placeholder="Your email" required autocomplete="email">
+                    </div>
+                    <div class="form-row">
+                        <label for="registerPassword">Password</label>
+                        <input id="registerPassword" name="password" type="password" placeholder="At least 6 characters" required autocomplete="new-password" minlength="6">
+                    </div>
+
+                    <!--
+                        Turnstile widget: invisible by default ("managed" mode shows a
+                        spinner only when Cloudflare is uncertain — no annoying puzzles).
+                        Replace YOUR_REGISTER_SITE_KEY with your Turnstile site key.
+                    -->
+                    <div class="cf-turnstile"
+                        data-sitekey="0x4AAAAAADdGyqfEZ6aSnrlg67cHZMvtYSI"
+                        data-callback="onRegisterTurnstileSuccess"
+                        data-theme="light"
+                        data-size="normal">
+                    </div>
+
+                    <button type="submit">Create Account</button>
+                    <p class="form-status" aria-live="polite"></p>
+                    <p class="form-legal">
+                        By registering you agree to our
+                        <a href="privacy.html">Privacy Policy</a> and
+                        <a href="terms.html">Terms of Service</a>.
+                    </p>
+                </form>
+
+                <!-- ── Login ── -->
+                <form id="loginForm" class="auth-card">
+                    <span class="eyebrow">Sign in</span>
+                    <h2>Welcome back</h2>
+
+                    <div class="oauth-group">
+                        <button type="button" id="loginGoogleBtn" class="btn-oauth btn-oauth--google" aria-label="Sign in with Google">
+                            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/></svg>
+                            Continue with Google
+                        </button>
+                        <button type="button" id="loginGithubBtn" class="btn-oauth btn-oauth--github" aria-label="Sign in with GitHub">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.216.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                            Continue with GitHub
+                        </button>
+                    </div>
+
+                    <div class="oauth-divider"><span>or sign in with email</span></div>
+
+                    <div class="form-row">
+                        <label for="loginEmail">Email</label>
+                        <input id="loginEmail" name="email" type="email" placeholder="Your email" required autocomplete="email">
+                    </div>
+                    <div class="form-row password-row">
+                        <label for="loginPassword">Password</label>
+                        <!-- ADDED: forgot password link -->
+                        <a href="#" id="forgotPasswordLink" class="forgot-link" tabindex="-1">Forgot password?</a>
+                        <input id="loginPassword" name="password" type="password" placeholder="Your password" required autocomplete="current-password">
+                    </div>
+
+                    <!--
+                        Turnstile on login too — stops credential-stuffing bots.
+                        Replace YOUR_LOGIN_SITE_KEY (can be the same key as register).
+                    -->
+                    <div class="cf-turnstile"
+                        data-sitekey="0x4AAAAAADdGykxUsrGbzw6v"
+                        data-callback="onLoginTurnstileSuccess"
+                        data-theme="light"
+                        data-size="normal">
+                    </div>
+
+                    <button type="submit">Sign In</button>
+                    <p class="form-status" aria-live="polite"></p>
+                </form>
+
+                <!-- ── Forgot password ── (hidden by default, shown via JS) -->
+                <form id="forgotForm" class="auth-card" style="display:none">
+                    <span class="eyebrow">Reset password</span>
+                    <h2>Forgot your password?</h2>
+                    <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.2rem">
+                        Enter your email and we'll send you a reset link.
+                    </p>
+                    <div class="form-row">
+                        <label for="forgotEmail">Email</label>
+                        <input id="forgotEmail" name="email" type="email" placeholder="Your email" required autocomplete="email">
+                    </div>
+                    <button type="submit">Send Reset Link</button>
+                    <p class="form-status" aria-live="polite"></p>
+                    <p style="margin-top:.75rem">
+                        <a href="#" id="backToLoginLink" style="font-size:.875rem;color:var(--orange)">← Back to sign in</a>
+                    </p>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>Dependable project planning, construction, renovation, and support services.</p>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Account</h3>
+                <p><a href="auth.html">Register or Login</a></p>
+                <p><a href="messages.html">Dashboard</a></p>
+                <p><a href="privacy.html">Privacy Policy</a></p>
+                <p><a href="terms.html">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Forgot password link next to the label */
+        .password-row { position: relative; }
+        .forgot-link {
+            position: absolute; right: 0; top: 0;
+            font-size: .78rem; color: var(--orange, #f16f20);
+            text-decoration: none; font-weight: 600;
+        }
+        .forgot-link:hover { text-decoration: underline; }
+        .form-legal {
+            font-size: .78rem; color: var(--text-muted, #888);
+            margin-top: .75rem; line-height: 1.5;
+        }
+        .form-legal a { color: var(--orange, #f16f20); }
+    </style>
+
+    <script src="js/supabase-config.js"></script>
+    <script type="module" src="js/main.js"></script>
+
+    <!--
+        Turnstile callback stubs — main.js reads window._turnstileRegisterToken
+        and window._turnstileLoginToken before calling signUp / signInWithPassword.
+        The Supabase captchaToken option is set from these values.
+    -->
+    <script>
+        window._turnstileRegisterToken = null;
+        window._turnstileLoginToken    = null;
+
+        function onRegisterTurnstileSuccess(token) {
+            window._turnstileRegisterToken = token;
+        }
+        function onLoginTurnstileSuccess(token) {
+            window._turnstileLoginToken = token;
+        }
+    </script>
+</body>
+</html>

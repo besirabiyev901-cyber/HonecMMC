@@ -1,0 +1,109 @@
+/**
+ * Cloudflare Worker — Security Headers
+ * Deploy this as your Worker at weathered-snow-6243.besirabiyev901.workers.dev
+ *
+ * What it does:
+ *  1. Adds a strict Content-Security-Policy (CSP)
+ *  2. Adds HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy
+ *  3. Sets a CSRF cookie (__csrf) on every HTML response (used by csrf.js)
+ *  4. Proxies all other requests through unchanged
+ *
+ * HOW TO DEPLOY:
+ *  Cloudflare Dashboard → Workers & Pages → Create → select your worker →
+ *  paste this entire file → Save & Deploy
+ */
+
+// ── Adjust these to match your actual origins ──────────────────────
+const SUPABASE_ORIGIN = 'https://cshdvpxdykxetjjpuesk.supabase.co'; // e.g. https://abcxyz.supabase.co
+const SITE_ORIGIN     = 'https://weathered-snow-6243.besirabiyev901.workers.dev';
+
+// ── Helper: generate a random CSRF token ──────────────────────────
+function generateToken(len = 32) {
+    const arr = new Uint8Array(len);
+    crypto.getRandomValues(arr);
+    return [...arr].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ── Build the CSP header value ─────────────────────────────────────
+// Supabase JS CDN + your own origin are the only allowed script sources.
+// Tighten further once you self-host the Supabase SDK.
+function buildCSP() {
+    return [
+        `default-src 'self'`,
+
+        // Scripts: own origin + Supabase CDN (jsdelivr delivers @supabase/supabase-js)
+        `script-src 'self' https://cdn.jsdelivr.net`,
+
+        // Styles: own origin only (add 'unsafe-inline' ONLY if you have inline styles
+        // you cannot remove — try to avoid it)
+        `style-src 'self' 'unsafe-inline'`,
+
+        // Images: own origin + Supabase storage public bucket
+        `img-src 'self' data: ${SUPABASE_ORIGIN}`,
+
+        // Fonts: own origin
+        `font-src 'self'`,
+
+        // API calls (fetch/XHR): own origin + Supabase project
+        `connect-src 'self' ${SUPABASE_ORIGIN} wss://${new URL(SUPABASE_ORIGIN).host}`,
+
+        // YouTube iframes for embedded videos
+        `frame-src https://www.youtube.com`,
+
+        // Media (video/audio) from Supabase storage
+        `media-src 'self' ${SUPABASE_ORIGIN}`,
+
+        // Disallow everything else (workers, manifests, etc.) by default
+        `worker-src 'none'`,
+        `object-src 'none'`,
+        `base-uri   'self'`,
+        `form-action 'self'`,
+
+        // Upgrade any accidental HTTP sub-requests to HTTPS
+        `upgrade-insecure-requests`,
+    ].join('; ');
+}
+
+// ── Main fetch handler ─────────────────────────────────────────────
+export default {
+    async fetch(request, env, ctx) {
+        // 1. Forward the request to the origin (your static site)
+        const response = await fetch(request);
+
+        // 2. Only inject headers on HTML responses
+        const contentType = response.headers.get('content-type') || '';
+        const isHTML = contentType.includes('text/html');
+
+        // Clone so we can mutate headers
+        const newHeaders = new Headers(response.headers);
+
+        // 3. Security headers — applied to ALL responses
+        newHeaders.set('X-Content-Type-Options',  'nosniff');
+        newHeaders.set('X-Frame-Options',          'SAMEORIGIN');
+        newHeaders.set('Referrer-Policy',          'strict-origin-when-cross-origin');
+        newHeaders.set('Permissions-Policy',       'geolocation=(), microphone=(), camera=()');
+        newHeaders.set(
+            'Strict-Transport-Security',
+            'max-age=63072000; includeSubDomains; preload'
+        );
+
+        // 4. CSP + CSRF cookie — HTML responses only
+        if (isHTML) {
+            newHeaders.set('Content-Security-Policy', buildCSP());
+
+            // Set the __csrf cookie that csrf.js reads
+            // SameSite=Strict prevents CSRF; Secure ensures HTTPS-only
+            const csrfToken = generateToken();
+            newHeaders.append(
+                'Set-Cookie',
+                `__csrf=${csrfToken}; Path=/; SameSite=Strict; Secure; HttpOnly`
+            );
+        }
+
+        return new Response(response.body, {
+            status:     response.status,
+            statusText: response.statusText,
+            headers:    newHeaders,
+        });
+    },
+};
